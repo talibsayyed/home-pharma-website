@@ -127,5 +127,5 @@ This project is licensed under the MIT License. See the LICENSE file for details
 ## Contact
 For any queries or feedback, please contact:
 - **Name**: Talib Sayyed
-- **Email**: [your-email@example.com](mailto:your-email@example.com)
+- **Email**: [talibsayyed1999@gmail.com](mailto:your-email@example.com)
 - **GitHub**: [https://github.com/talibsayyed](https://github.com/talibsayyed)
