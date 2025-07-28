@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Pharma – Online Medicine Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Noor's Pharma</h2>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link" style="color: black;">Home</a>
+                <a href="#products" class="nav-link" style="color: black;">Products</a>
+                <a href="#" class="nav-link" onclick="openCart()" style="color: black;">Cart (<span id="cart-count">0</span>)</a>
+                <a href="#contact" class="nav-link" style="color: black;">Contact</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="floating-pill">💊</div>
+            <h1 class="hero-title">Noor's Pharma</h1>
+            <p class="hero-subtitle">Your trusted partner for quality medicines and healthcare products</p>
+            <p class="hero-description">Fast, reliable, and safe delivery of authentic medicines to your doorstep</p>
+            <button class="btn btn-primary hero-btn" onclick="scrollToSection('products')">Shop Now</button>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products-section">
+        <div class="container">
+            <h2 class="section-title">Our Medicine Collection</h2>
+            <p class="section-subtitle">Browse our extensive range of authentic medicines and healthcare products</p>
+
+            <!-- Search & Filter -->
+            <div class="search-filter-container">
+                <div class="search-wrapper">
+                    <input type="text" id="search-input" class="form-control search-input" placeholder="Search medicines by name...">
+                    <span class="search-icon">🔍</span>
+                </div>
+                <select id="category-select" class="form-control filter-select">
+                    <option value="All">All Categories</option>
+                </select>
+            </div>
+
+            <div class="products-grid" id="products-grid">
+                <!-- Products will be rendered here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / Checkout Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Place Your Order</h2>
+            <p class="section-subtitle">Fill in your details to complete your medicine order</p>
+            
+            <div class="checkout-container">
+                <form id="checkout-form" class="checkout-form">
+                    <h3 class="form-title">Delivery Information</h3>
+                    
+                    <div class="form-group">
+                        <label for="name" class="form-label">Full Name *</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone" class="form-label">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" class="form-control" pattern="[0-9]{10}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="address" class="form-label">Complete Address *</label>
+                        <textarea id="address" name="address" class="form-control" rows="3" required placeholder="House/Flat No, Street, Landmark"></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city" class="form-label">City *</label>
+                            <input type="text" id="city" name="city" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="pincode" class="form-label">Pincode *</label>
+                            <input type="text" id="pincode" name="pincode" class="form-control" pattern="[0-9]{6}" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="notes" class="form-label">Special Instructions (Optional)</label>
+                        <textarea id="notes" name="notes" class="form-control" rows="2" placeholder="Any special delivery instructions or medical requirements"></textarea>
+                    </div>
+
+                    <div class="order-summary" id="order-summary">
+                        <h4>Order Summary</h4>
+                        <div id="summary-items"></div>
+                        <div class="summary-total">Total: ₹<span id="summary-total">0</span></div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full-width">Place Order 📦</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Panel -->
+    <div class="cart-panel" id="cart-panel">
+        <div class="cart-header">
+            <h3>🛒 Your Cart</h3>
+            <button class="close-cart" onclick="closeCart()">&times;</button>
+        </div>
+        <div class="cart-content" id="cart-content">
+            <div class="empty-cart">
+                <div class="empty-cart-icon">🛒</div>
+                <p>Your cart is empty</p>
+                <p class="empty-cart-subtitle">Add some medicines to get started</p>
+            </div>
+        </div>
+        <div class="cart-footer" id="cart-footer">
+            <div class="cart-total">
+                Total: ₹<span id="cart-total">0</span>
+            </div>
+            <button class="btn btn-primary btn-full-width" onclick="scrollToSection('contact'); closeCart();">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+
+    <!-- Floating Cart Button -->
+    <button class="floating-cart" onclick="openCart()" id="floating-cart">
+        🛒<span id="floating-cart-count">0</span>
+    </button>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Order Success Modal -->
+    <div class="modal" id="success-modal">
+        <div class="modal-content">
+            <div class="success-icon">✅</div>
+            <h3>Order Placed Successfully!</h3>
+            <p>Thank you for your order. We will contact you soon to confirm delivery details.</p>
+            <button class="btn btn-primary" onclick="closeModal()">Continue Shopping</button>
+        </div>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="modal-overlay" onclick="closeModal()"></div>
+
+    <!-- Watermark -->
+    <div class="watermark">Made by Noorjahan Khan</div>
+
+    <script src="app.js"></script>
+</body>
+</html>
